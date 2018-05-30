@@ -10,16 +10,22 @@
       * [Go](https://golang.org/doc/install#osx)
       * [Ansible](http://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#latest-releases-via-pip)
   * Change docker to allow insecure pulls (required for `oc cluster up`):
-    * Edit `/etc/sysconfig/docker`
-    * Change `OPTIONS=` to include `--insecure-registry 172.30.0.0/16`
+    * Edit `/etc/docker/daemon.json`
+    * If empty, set content to `{"insecure-registries": ["172.30.0.0/16"]}`
+    * If not empty, add `"insecure-registries": ["172.30.0.0/16"]`
   * Enable and Start docker:
+    * `sudo systemctl daemon-reload`
     * `sudo systemctl enable docker`
-    * `sudo systemctl start docker`
+    * `sudo systemctl restart docker`
   * Install the OpenShift and Kubernetes Python clients:
     * `sudo pip install kubernetes openshift`
   * Install python SELinux libraries
-    * `dnf install python2-libselinux`
+    * Fedora 27: `sudo dnf install libselinux-python`
+    * Fedora 28: `sudo dnf install python2-libselinux`
   * Clone this repo to `$HOME/go/src/github.com/openshift/cluster-operator`
+    * `mkdir -p $HOME/go/src/github.com/openshift/`
+    * `cd $HOME/go/src/github.com/openshift/`
+    * `git clone git@github.com:openshift/cluster-operator.git`
   * Get cfssl:
     * `go get -u github.com/cloudflare/cfssl/cmd/...`
   * Get the oc client binary
