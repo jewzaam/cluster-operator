@@ -52,6 +52,7 @@
 ## Deploy / Re-deploy Cluster Operator
 
   * Deploy cluster operator to the OpenShift cluster you are currently logged into. (see above for oc login instructions above)
+    * `cd $HOME/go/src/github.com/openshift/cluster-operator`
     * `ansible-playbook contrib/ansible/deploy-devel-playbook.yml`
     * This creates an OpenShift BuildConfig and ImageStream for the cluster-operator image. (which does not yet exist)
   * Compile and push an image.
